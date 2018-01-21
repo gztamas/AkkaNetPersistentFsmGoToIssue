@@ -1,5 +1,4 @@
-﻿using System;
-using Akka.Actor;
+﻿using Akka.Actor;
 using Akka.Persistence.Fsm;
 
 namespace AkkaPersistentFSMRepro
@@ -31,8 +30,9 @@ namespace AkkaPersistentFSMRepro
 
                     if (hasNoRef)
                     {
-                        //return GoTo(WaitingState.Instance)
-                        return Stay()
+                        return GoTo(WaitingState.Instance)
+                        //return Stay()
+                        //return GoTo(DefaultState.Instance)
                             .Applying(@event)
                             .AndThen(x =>
                             {
