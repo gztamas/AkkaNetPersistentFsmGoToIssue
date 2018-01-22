@@ -47,6 +47,22 @@ namespace AkkaPersistentFSMRepro
                 }
                 return Stay();
             });
+
+            // UNCOMMENT THIS, TO "FIX"
+            //When(WaitingState.Instance, (evt, state) =>
+            //{
+            //    if (evt.FsmEvent is Commands.SetRef)
+            //    {
+            //        var command = (Commands.SetRef) evt.FsmEvent;
+            //        var @event = new DomainEvents.RefSet(command.Ref);
+
+            //        return GoTo(DefaultState.Instance)
+            //            .Applying(@event)
+            //            .AndThen(x => Context.System.EventStream.Publish(@event));
+            //    }
+
+            //    return Stay();
+            //});
         }
 
         protected override Data ApplyEvent(DomainEvents.IDomainEvent e, Data currentData)
